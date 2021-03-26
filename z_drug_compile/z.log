@@ -1,0 +1,533 @@
+++ date +%Y-%m-%d
++ cur_date=2021-03-19
++ base_p=/user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw
++ input_p=/user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.ori_gcw
++ hive -e 'set spark.dynamicAllocation.maxExecutors=50;
+        insert overwrite directory '\''/user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.ori_gcw'\'' row format delimited fields terminated by '\''\001'\''
+select pid,regexp_replace(title, '\''[\r\n\t]'\'', '\'''\'') from ( select *,row_number() over(partition by pid order by to_date(batch_time) desc) as rn from ods.ods_retail_jd_medicine_products)a where rn=1;'
+WARNING: Use "yarn jar" to launch YARN applications.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/jars/log4j-slf4j-impl-2.8.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hive/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/jars/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+Logging initialized using configuration in jar:file:/opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/jars/hive-common-2.1.1-cdh6.2.0.jar!/hive-log4j2.properties Async: false
+Query ID = supdev_20210319103943_d389578c-cd4b-48b9-a5b9-393d93693ae9
+Total jobs = 3
+Launching Job 1 out of 3
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Running with YARN Application = application_1615964619567_8554
+Kill Command = /opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/bin/yarn application -kill application_1615964619567_8554
+Hive on Spark Session Web UI URL: http://SJ-20-207-74:43067
+
+Query Hive on Spark job[0] stages: [0, 1]
+Spark job[0] status = RUNNING
+Job Progress Format
+CurrentTime StageId_StageAttemptId: SucceededTasksCount(+RunningTasksCount-FailedTasksCount)/TotalTasksCount
+2021-03-19 10:40:09,768	Stage-0_0: 0/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:10,772	Stage-0_0: 0(+1)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:13,789	Stage-0_0: 0(+5)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:15,797	Stage-0_0: 0(+8)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:16,801	Stage-0_0: 0(+15)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:17,827	Stage-0_0: 0(+23)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:18,836	Stage-0_0: 0(+28)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:19,867	Stage-0_0: 0(+42)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:20,872	Stage-0_0: 0(+45)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:21,905	Stage-0_0: 1(+45)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:23,931	Stage-0_0: 2(+45)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:24,935	Stage-0_0: 5(+159)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:26,941	Stage-0_0: 6(+158)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:27,963	Stage-0_0: 9(+155)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:28,967	Stage-0_0: 11(+153)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:29,970	Stage-0_0: 13(+151)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:30,973	Stage-0_0: 16(+148)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:31,977	Stage-0_0: 28(+136)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:32,980	Stage-0_0: 33(+131)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:33,984	Stage-0_0: 40(+124)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:34,987	Stage-0_0: 43(+121)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:35,989	Stage-0_0: 57(+107)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:36,992	Stage-0_0: 65(+99)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:37,994	Stage-0_0: 69(+95)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:38,997	Stage-0_0: 80(+84)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:40,000	Stage-0_0: 97(+67)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:41,002	Stage-0_0: 120(+44)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:42,004	Stage-0_0: 139(+25)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:43,006	Stage-0_0: 151(+13)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:44,009	Stage-0_0: 160(+4)/164	Stage-1_0: 0/1099	
+2021-03-19 10:40:45,023	Stage-0_0: 164/164 Finished	Stage-1_0: 0(+164)/1099	
+2021-03-19 10:40:48,053	Stage-0_0: 164/164 Finished	Stage-1_0: 0(+165)/1099	
+2021-03-19 10:40:49,061	Stage-0_0: 164/164 Finished	Stage-1_0: 165(+169)/1099	
+2021-03-19 10:40:50,108	Stage-0_0: 164/164 Finished	Stage-1_0: 336(+168)/1099	
+2021-03-19 10:40:51,111	Stage-0_0: 164/164 Finished	Stage-1_0: 547(+169)/1099	
+2021-03-19 10:40:52,113	Stage-0_0: 164/164 Finished	Stage-1_0: 778(+189)/1099	
+2021-03-19 10:40:53,116	Stage-0_0: 164/164 Finished	Stage-1_0: 997(+102)/1099	
+2021-03-19 10:40:54,118	Stage-0_0: 164/164 Finished	Stage-1_0: 1006(+93)/1099	
+2021-03-19 10:40:55,120	Stage-0_0: 164/164 Finished	Stage-1_0: 1010(+89)/1099	
+2021-03-19 10:40:57,124	Stage-0_0: 164/164 Finished	Stage-1_0: 1026(+73)/1099	
+2021-03-19 10:40:58,126	Stage-0_0: 164/164 Finished	Stage-1_0: 1030(+69)/1099	
+2021-03-19 10:40:59,128	Stage-0_0: 164/164 Finished	Stage-1_0: 1031(+68)/1099	
+2021-03-19 10:41:00,130	Stage-0_0: 164/164 Finished	Stage-1_0: 1035(+64)/1099	
+2021-03-19 10:41:02,134	Stage-0_0: 164/164 Finished	Stage-1_0: 1039(+60)/1099	
+2021-03-19 10:41:03,136	Stage-0_0: 164/164 Finished	Stage-1_0: 1042(+57)/1099	
+2021-03-19 10:41:04,138	Stage-0_0: 164/164 Finished	Stage-1_0: 1043(+56)/1099	
+2021-03-19 10:41:05,140	Stage-0_0: 164/164 Finished	Stage-1_0: 1063(+36)/1099	
+2021-03-19 10:41:06,142	Stage-0_0: 164/164 Finished	Stage-1_0: 1068(+31)/1099	
+2021-03-19 10:41:07,145	Stage-0_0: 164/164 Finished	Stage-1_0: 1071(+28)/1099	
+2021-03-19 10:41:09,148	Stage-0_0: 164/164 Finished	Stage-1_0: 1072(+27)/1099	
+2021-03-19 10:41:10,150	Stage-0_0: 164/164 Finished	Stage-1_0: 1076(+23)/1099	
+2021-03-19 10:41:11,152	Stage-0_0: 164/164 Finished	Stage-1_0: 1083(+16)/1099	
+2021-03-19 10:41:14,157	Stage-0_0: 164/164 Finished	Stage-1_0: 1083(+16)/1099	
+2021-03-19 10:41:17,162	Stage-0_0: 164/164 Finished	Stage-1_0: 1092(+7)/1099	
+2021-03-19 10:41:18,164	Stage-0_0: 164/164 Finished	Stage-1_0: 1099/1099 Finished	
+Spark job[0] finished successfully in 71.44 second(s)
+Spark Job[0] Metrics: TaskDurationTime: 5053165, ExecutorCpuTime: 2110895, JvmGCTime: 153184, BytesRead / RecordsRead: 43187469739 / 32541119, BytesReadEC: 0, ShuffleTotalBytesRead / ShuffleRecordsRead: 1388435406 / 32541119, ShuffleBytesWritten / ShuffleRecordsWritten: 1388435406 / 32541119
+Stage-3 is filtered out by condition resolver.
+Stage-2 is selected by condition resolver.
+Stage-4 is filtered out by condition resolver.
+Launching Job 3 out of 3
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Running with YARN Application = application_1615964619567_8554
+Kill Command = /opt/cloudera/parcels/CDH-6.2.0-1.cdh6.2.0.p0.967373/lib/hadoop/bin/yarn application -kill application_1615964619567_8554
+Hive on Spark Session Web UI URL: http://SJ-20-207-74:43067
+
+Query Hive on Spark job[1] stages: [2]
+Spark job[1] status = RUNNING
+Job Progress Format
+CurrentTime StageId_StageAttemptId: SucceededTasksCount(+RunningTasksCount-FailedTasksCount)/TotalTasksCount
+2021-03-19 10:41:19,368	Stage-2_0: 0/1	
+2021-03-19 10:41:22,373	Stage-2_0: 0/1	
+2021-03-19 10:41:25,378	Stage-2_0: 0/1	
+2021-03-19 10:41:27,382	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:30,388	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:33,393	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:36,398	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:39,403	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:42,411	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:45,416	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:48,421	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:51,427	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:54,433	Stage-2_0: 0(+1)/1	
+2021-03-19 10:41:57,438	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:00,443	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:03,449	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:06,460	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:09,466	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:12,472	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:15,477	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:18,483	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:21,488	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:24,493	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:27,499	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:30,504	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:33,509	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:36,514	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:39,519	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:42,525	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:45,530	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:48,535	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:51,540	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:54,545	Stage-2_0: 0(+1)/1	
+2021-03-19 10:42:57,551	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:00,556	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:03,563	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:06,571	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:09,577	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:12,582	Stage-2_0: 0(+1)/1	
+2021-03-19 10:43:13,584	Stage-2_0: 1/1 Finished	
+Spark job[1] finished successfully in 115.22 second(s)
+Spark Job[1] Metrics: TaskDurationTime: 114468, ExecutorCpuTime: 1972, JvmGCTime: 0, BytesRead / RecordsRead: 48865729 / 1008913, BytesReadEC: 0, ShuffleTotalBytesRead / ShuffleRecordsRead: 0 / 0, ShuffleBytesWritten / ShuffleRecordsWritten: 0 / 0
+Moving data to directory /user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.ori_gcw
+OK
+Time taken: 209.954 seconds
++ '[' 0 -ne 0 ']'
++ output_p=/user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.drug_duplicate_v1.gcw
++ hadoop fs -rm -r -skipTrash /user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.drug_duplicate_v1.gcw
+Deleted /user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.drug_duplicate_v1.gcw
++ spark-submit --num-executors 50 --executor-memory 6g --conf spark.sql.broadcastTimeout=3000 drug_duplicate.spk.py online /user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.ori_gcw /user/hive/warehouse/mining.db/jiangtao.yang/drug_compile_gcw/drug_ana_2021-03-19.drug_duplicate_v1.gcw
+/opt/python3/lib/python3.7/site-packages/pandas/compat/__init__.py:117: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
+  warnings.warn(msg)
+env-type: online part-num: 5
+21/03/19 10:43:18 INFO spark.SparkContext: Running Spark version 2.4.0-cdh6.2.0
+21/03/19 10:43:18 INFO logging.DriverLogger: Added a local log appender at: /tmp/spark-4f91c9ca-de50-4f17-b9f4-e9ae448fac60/__driver_logs__/driver.log
+21/03/19 10:43:18 INFO spark.SparkContext: Submitted application: gcw_drug_compile
+21/03/19 10:43:19 INFO spark.SecurityManager: Changing view acls to: supdev
+21/03/19 10:43:19 INFO spark.SecurityManager: Changing modify acls to: supdev
+21/03/19 10:43:19 INFO spark.SecurityManager: Changing view acls groups to: 
+21/03/19 10:43:19 INFO spark.SecurityManager: Changing modify acls groups to: 
+21/03/19 10:43:19 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(supdev); groups with view permissions: Set(); users  with modify permissions: Set(supdev); groups with modify permissions: Set()
+21/03/19 10:43:19 INFO util.Utils: Successfully started service 'sparkDriver' on port 33480.
+21/03/19 10:43:19 INFO spark.SparkEnv: Registering MapOutputTracker
+21/03/19 10:43:19 INFO spark.SparkEnv: Registering BlockManagerMaster
+21/03/19 10:43:19 INFO storage.BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+21/03/19 10:43:19 INFO storage.BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+21/03/19 10:43:19 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-7d73a41a-5dae-4e10-939d-dea756d3db9c
+21/03/19 10:43:19 INFO memory.MemoryStore: MemoryStore started with capacity 366.3 MB
+21/03/19 10:43:19 INFO spark.SparkEnv: Registering OutputCommitCoordinator
+21/03/19 10:43:19 INFO util.log: Logging initialized @2714ms
+21/03/19 10:43:19 INFO server.Server: jetty-9.3.z-SNAPSHOT, build timestamp: 2018-09-05T05:11:46+08:00, git hash: 3ce520221d0240229c862b122d2b06c12a625732
+21/03/19 10:43:19 INFO server.Server: Started @2797ms
+21/03/19 10:43:19 INFO server.AbstractConnector: Started ServerConnector@5d2198db{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+21/03/19 10:43:19 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3812cdb7{/jobs,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@20d36a66{/jobs/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4c9122ea{/jobs/job,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6daf9c2{/jobs/job/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3d613325{/stages,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@78a2d011{/stages/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@46715948{/stages/stage,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4db43353{/stages/stage/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@14388b4{/stages/pool,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@33a09de5{/stages/pool/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@52527d01{/storage,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3e10f2b3{/storage/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@238bdbed{/storage/rdd,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@147335cc{/storage/rdd/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5508f836{/environment,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6c340d4e{/environment/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@119de796{/executors,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@1ccd7d3c{/executors/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@e96ffdb{/executors/threadDump,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4204cd3a{/executors/threadDump/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3cdb33bb{/static,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@681dcf31{/,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4bbbdf2e{/api,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6d69a0fd{/jobs/job/kill,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5f9cf61{/stages/stage/kill,null,AVAILABLE,@Spark}
+21/03/19 10:43:19 INFO ui.SparkUI: Bound SparkUI to 0.0.0.0, and started at http://SJ-20-207-7:4040
+21/03/19 10:43:19 INFO util.Utils: Using initial executors = 50, max of spark.dynamicAllocation.initialExecutors, spark.dynamicAllocation.minExecutors and spark.executor.instances
+21/03/19 10:43:20 INFO client.RMProxy: Connecting to ResourceManager at SJ-20-207-4/172.20.207.4:8032
+21/03/19 10:43:20 INFO yarn.Client: Requesting a new application from cluster with 39 NodeManagers
+21/03/19 10:43:20 INFO conf.Configuration: resource-types.xml not found
+21/03/19 10:43:20 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+21/03/19 10:43:20 INFO yarn.Client: Verifying our application has not requested more than the maximum memory capability of the cluster (53760 MB per container)
+21/03/19 10:43:20 INFO yarn.Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+21/03/19 10:43:20 INFO yarn.Client: Setting up container launch context for our AM
+21/03/19 10:43:20 INFO yarn.Client: Setting up the launch environment for our AM container
+21/03/19 10:43:20 INFO yarn.Client: Preparing resources for our AM container
+21/03/19 10:43:21 INFO yarn.Client: Uploading resource file:/tmp/spark-4f91c9ca-de50-4f17-b9f4-e9ae448fac60/__spark_conf__8637413046764634887.zip -> hdfs://db-cluster/user/supdev/.sparkStaging/application_1615964619567_8557/__spark_conf__.zip
+21/03/19 10:43:24 INFO spark.SecurityManager: Changing view acls to: supdev
+21/03/19 10:43:24 INFO spark.SecurityManager: Changing modify acls to: supdev
+21/03/19 10:43:24 INFO spark.SecurityManager: Changing view acls groups to: 
+21/03/19 10:43:24 INFO spark.SecurityManager: Changing modify acls groups to: 
+21/03/19 10:43:24 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(supdev); groups with view permissions: Set(); users  with modify permissions: Set(supdev); groups with modify permissions: Set()
+21/03/19 10:43:24 INFO yarn.Client: Submitting application application_1615964619567_8557 to ResourceManager
+21/03/19 10:43:24 INFO impl.YarnClientImpl: Submitted application application_1615964619567_8557
+21/03/19 10:43:25 INFO yarn.Client: Application report for application_1615964619567_8557 (state: ACCEPTED)
+21/03/19 10:43:25 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: root.users.supdev
+	 start time: 1616121804223
+	 final status: UNDEFINED
+	 tracking URL: http://SJ-20-207-4:8088/proxy/application_1615964619567_8557/
+	 user: supdev
+21/03/19 10:43:26 INFO yarn.Client: Application report for application_1615964619567_8557 (state: ACCEPTED)
+21/03/19 10:43:26 INFO cluster.YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> SJ-20-207-4, PROXY_URI_BASES -> http://SJ-20-207-4:8088/proxy/application_1615964619567_8557), /proxy/application_1615964619567_8557
+21/03/19 10:43:26 INFO ui.JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /jobs, /jobs/json, /jobs/job, /jobs/job/json, /stages, /stages/json, /stages/stage, /stages/stage/json, /stages/pool, /stages/pool/json, /storage, /storage/json, /storage/rdd, /storage/rdd/json, /environment, /environment/json, /executors, /executors/json, /executors/threadDump, /executors/threadDump/json, /static, /, /api, /jobs/job/kill, /stages/stage/kill.
+21/03/19 10:43:27 INFO yarn.Client: Application report for application_1615964619567_8557 (state: RUNNING)
+21/03/19 10:43:27 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 172.20.207.62
+	 ApplicationMaster RPC port: -1
+	 queue: root.users.supdev
+	 start time: 1616121804223
+	 final status: UNDEFINED
+	 tracking URL: http://SJ-20-207-4:8088/proxy/application_1615964619567_8557/
+	 user: supdev
+21/03/19 10:43:27 INFO cluster.YarnClientSchedulerBackend: Application application_1615964619567_8557 has started running.
+21/03/19 10:43:27 INFO cluster.SchedulerExtensionServices: Starting Yarn extension services with app application_1615964619567_8557 and attemptId None
+21/03/19 10:43:27 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 34244.
+21/03/19 10:43:27 INFO netty.NettyBlockTransferService: Server created on SJ-20-207-7:34244
+21/03/19 10:43:27 INFO storage.BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+21/03/19 10:43:27 INFO storage.BlockManagerMaster: Registering BlockManager BlockManagerId(driver, SJ-20-207-7, 34244, None)
+21/03/19 10:43:27 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-7:34244 with 366.3 MB RAM, BlockManagerId(driver, SJ-20-207-7, 34244, None)
+21/03/19 10:43:27 INFO storage.BlockManagerMaster: Registered BlockManager BlockManagerId(driver, SJ-20-207-7, 34244, None)
+21/03/19 10:43:27 INFO storage.BlockManager: external shuffle service port = 7337
+21/03/19 10:43:27 INFO storage.BlockManager: Initialized BlockManager: BlockManagerId(driver, SJ-20-207-7, 34244, None)
+21/03/19 10:43:27 INFO cluster.YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+21/03/19 10:43:27 INFO ui.JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /metrics/json.
+21/03/19 10:43:27 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5aabe07{/metrics/json,null,AVAILABLE,@Spark}
+21/03/19 10:43:27 INFO scheduler.EventLoggingListener: Logging events to hdfs://db-cluster/user/spark/applicationHistory/application_1615964619567_8557
+21/03/19 10:43:27 INFO util.Utils: Using initial executors = 50, max of spark.dynamicAllocation.initialExecutors, spark.dynamicAllocation.minExecutors and spark.executor.instances
+21/03/19 10:43:27 WARN lineage.LineageWriter: Lineage directory /var/log/spark/lineage doesn't exist or is not writable. Lineage for this application will be disabled.
+21/03/19 10:43:27 INFO util.Utils: Extension com.cloudera.spark.lineage.NavigatorAppListener not being initialized.
+21/03/19 10:43:27 INFO logging.DriverLogger$DfsAsyncWriter: Started driver log file sync to: /user/spark/driverLogs/application_1615964619567_8557_driver.log
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.77:33606) with ID 49
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 49 has registered (new total is 1)
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.22:44314) with ID 23
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 23 has registered (new total is 2)
+21/03/19 10:43:31 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-77:33541 with 3.0 GB RAM, BlockManagerId(49, SJ-20-207-77, 33541, None)
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.22:44312) with ID 24
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 24 has registered (new total is 3)
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.78:41786) with ID 28
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 28 has registered (new total is 4)
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.22:44316) with ID 25
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 25 has registered (new total is 5)
+21/03/19 10:43:31 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.79:56884) with ID 2
+21/03/19 10:43:31 INFO spark.ExecutorAllocationManager: New executor 2 has registered (new total is 6)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager sj-20-207-22:45304 with 3.0 GB RAM, BlockManagerId(23, sj-20-207-22, 45304, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.79:56886) with ID 3
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 3 has registered (new total is 7)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.77:33610) with ID 48
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 48 has registered (new total is 8)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.79:56888) with ID 1
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 1 has registered (new total is 9)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.22:44320) with ID 22
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 22 has registered (new total is 10)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.77:33608) with ID 50
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 50 has registered (new total is 11)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.41:48360) with ID 39
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 39 has registered (new total is 12)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-78:45703 with 3.0 GB RAM, BlockManagerId(28, SJ-20-207-78, 45703, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager sj-20-207-22:37581 with 3.0 GB RAM, BlockManagerId(24, sj-20-207-22, 37581, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.41:48362) with ID 40
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 40 has registered (new total is 13)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.78:41788) with ID 27
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 27 has registered (new total is 14)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.41:48364) with ID 41
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 41 has registered (new total is 15)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.78:41790) with ID 26
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 26 has registered (new total is 16)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.64:50252) with ID 44
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 44 has registered (new total is 17)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-79:39433 with 3.0 GB RAM, BlockManagerId(2, SJ-20-207-79, 39433, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager sj-20-207-22:33610 with 3.0 GB RAM, BlockManagerId(25, sj-20-207-22, 33610, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.64:50254) with ID 43
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 43 has registered (new total is 18)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.64:50246) with ID 42
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 42 has registered (new total is 19)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.55:39080) with ID 14
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 14 has registered (new total is 20)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager sj-20-207-22:42634 with 3.0 GB RAM, BlockManagerId(22, sj-20-207-22, 42634, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-77:41485 with 3.0 GB RAM, BlockManagerId(50, SJ-20-207-77, 41485, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-79:40342 with 3.0 GB RAM, BlockManagerId(3, SJ-20-207-79, 40342, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-41:39450 with 3.0 GB RAM, BlockManagerId(39, SJ-20-207-41, 39450, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-77:43490 with 3.0 GB RAM, BlockManagerId(48, SJ-20-207-77, 43490, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-79:44976 with 3.0 GB RAM, BlockManagerId(1, SJ-20-207-79, 44976, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.59:41534) with ID 11
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 11 has registered (new total is 21)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-78:34992 with 3.0 GB RAM, BlockManagerId(26, SJ-20-207-78, 34992, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-78:40165 with 3.0 GB RAM, BlockManagerId(27, SJ-20-207-78, 40165, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-64:39522 with 3.0 GB RAM, BlockManagerId(44, SJ-20-207-64, 39522, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-41:36635 with 3.0 GB RAM, BlockManagerId(41, SJ-20-207-41, 36635, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-41:43200 with 3.0 GB RAM, BlockManagerId(40, SJ-20-207-41, 43200, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.55:39078) with ID 17
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 17 has registered (new total is 22)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.59:41536) with ID 13
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 13 has registered (new total is 23)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.59:41532) with ID 10
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 10 has registered (new total is 24)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.64:50258) with ID 45
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 45 has registered (new total is 25)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.55:39082) with ID 16
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 16 has registered (new total is 26)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.59:41538) with ID 12
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 12 has registered (new total is 27)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-55:41435 with 3.0 GB RAM, BlockManagerId(14, SJ-20-207-55, 41435, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-64:43095 with 3.0 GB RAM, BlockManagerId(43, SJ-20-207-64, 43095, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-64:40658 with 3.0 GB RAM, BlockManagerId(42, SJ-20-207-64, 40658, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-59:37428 with 3.0 GB RAM, BlockManagerId(11, SJ-20-207-59, 37428, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.55:39084) with ID 15
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 15 has registered (new total is 28)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-59:33170 with 3.0 GB RAM, BlockManagerId(10, SJ-20-207-59, 33170, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-64:42304 with 3.0 GB RAM, BlockManagerId(45, SJ-20-207-64, 42304, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-55:46383 with 3.0 GB RAM, BlockManagerId(17, SJ-20-207-55, 46383, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-59:45877 with 3.0 GB RAM, BlockManagerId(12, SJ-20-207-59, 45877, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-59:34740 with 3.0 GB RAM, BlockManagerId(13, SJ-20-207-59, 34740, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-55:38262 with 3.0 GB RAM, BlockManagerId(16, SJ-20-207-55, 38262, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.69:44274) with ID 9
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 9 has registered (new total is 29)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-55:38543 with 3.0 GB RAM, BlockManagerId(15, SJ-20-207-55, 38543, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.69:44278) with ID 8
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 8 has registered (new total is 30)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.69:44280) with ID 6
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 6 has registered (new total is 31)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-69:34137 with 3.0 GB RAM, BlockManagerId(9, SJ-20-207-69, 34137, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.69:44282) with ID 7
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 7 has registered (new total is 32)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-69:39173 with 3.0 GB RAM, BlockManagerId(6, SJ-20-207-69, 39173, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-69:45001 with 3.0 GB RAM, BlockManagerId(8, SJ-20-207-69, 45001, None)
+21/03/19 10:43:32 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-69:38608 with 3.0 GB RAM, BlockManagerId(7, SJ-20-207-69, 38608, None)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.61:58352) with ID 30
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 30 has registered (new total is 33)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.61:58356) with ID 29
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 29 has registered (new total is 34)
+21/03/19 10:43:32 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.61:58354) with ID 32
+21/03/19 10:43:32 INFO spark.ExecutorAllocationManager: New executor 32 has registered (new total is 35)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.61:58358) with ID 31
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 31 has registered (new total is 36)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-61:34746 with 3.0 GB RAM, BlockManagerId(30, SJ-20-207-61, 34746, None)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.5:46932) with ID 38
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 38 has registered (new total is 37)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-61:44596 with 3.0 GB RAM, BlockManagerId(29, SJ-20-207-61, 44596, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-61:32939 with 3.0 GB RAM, BlockManagerId(32, SJ-20-207-61, 32939, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-61:38589 with 3.0 GB RAM, BlockManagerId(31, SJ-20-207-61, 38589, None)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.5:46934) with ID 37
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 37 has registered (new total is 38)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.5:46938) with ID 36
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 36 has registered (new total is 39)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-5:46740 with 3.0 GB RAM, BlockManagerId(38, SJ-20-207-5, 46740, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-5:36807 with 3.0 GB RAM, BlockManagerId(37, SJ-20-207-5, 36807, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-5:37844 with 3.0 GB RAM, BlockManagerId(36, SJ-20-207-5, 37844, None)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.58:55438) with ID 19
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 19 has registered (new total is 40)
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.58:55442) with ID 18
+21/03/19 10:43:33 INFO cluster.YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.8
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.58:55444) with ID 21
+21/03/19 10:43:33 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.58:55446) with ID 20
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 18 has registered (new total is 41)
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 21 has registered (new total is 42)
+21/03/19 10:43:33 INFO spark.ExecutorAllocationManager: New executor 20 has registered (new total is 43)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-58:42368 with 3.0 GB RAM, BlockManagerId(19, SJ-20-207-58, 42368, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-58:35674 with 3.0 GB RAM, BlockManagerId(18, SJ-20-207-58, 35674, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-58:39153 with 3.0 GB RAM, BlockManagerId(20, SJ-20-207-58, 39153, None)
+21/03/19 10:43:33 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-58:34149 with 3.0 GB RAM, BlockManagerId(21, SJ-20-207-58, 34149, None)
+21/03/19 10:43:34 INFO memory.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 294.9 KB, free 366.0 MB)
+21/03/19 10:43:34 INFO memory.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 78.9 KB, free 365.9 MB)
+21/03/19 10:43:34 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on SJ-20-207-7:34244 (size: 78.9 KB, free: 366.2 MB)
+21/03/19 10:43:34 INFO spark.SparkContext: Created broadcast 0 from textFile at NativeMethodAccessorImpl.java:0
+21/03/19 10:43:34 INFO mapred.FileInputFormat: Total input files to process : 1
+21/03/19 10:43:34 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+21/03/19 10:43:34 INFO io.HadoopMapRedCommitProtocol: Using output committer class org.apache.hadoop.mapred.FileOutputCommitter
+21/03/19 10:43:34 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+21/03/19 10:43:34 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+21/03/19 10:43:34 INFO spark.SparkContext: Starting job: runJob at SparkHadoopWriter.scala:78
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Registering RDD 3 (groupByKey at /dfs/gongchengwei/z_drug_compile/drug_duplicate.spk.py:58)
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Registering RDD 7 (coalesce at NativeMethodAccessorImpl.java:0)
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Got job 0 (runJob at SparkHadoopWriter.scala:78) with 5 output partitions
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Final stage: ResultStage 2 (runJob at SparkHadoopWriter.scala:78)
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 1)
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Missing parents: List(ShuffleMapStage 1)
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /dfs/gongchengwei/z_drug_compile/drug_duplicate.spk.py:58), which has no missing parents
+21/03/19 10:43:34 INFO memory.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 11.8 KB, free 365.9 MB)
+21/03/19 10:43:34 INFO memory.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 11.7 KB, free 365.9 MB)
+21/03/19 10:43:34 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on SJ-20-207-7:34244 (size: 11.7 KB, free: 366.2 MB)
+21/03/19 10:43:34 INFO spark.SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1164
+21/03/19 10:43:34 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /dfs/gongchengwei/z_drug_compile/drug_duplicate.spk.py:58) (first 15 tasks are for partitions Vector(0, 1))
+21/03/19 10:43:34 INFO cluster.YarnScheduler: Adding task set 0.0 with 2 tasks
+21/03/19 10:43:35 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, SJ-20-207-59, executor 11, partition 0, RACK_LOCAL, 7975 bytes)
+21/03/19 10:43:35 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, SJ-20-207-41, executor 40, partition 1, RACK_LOCAL, 7975 bytes)
+21/03/19 10:43:35 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on SJ-20-207-41:43200 (size: 11.7 KB, free: 3.0 GB)
+21/03/19 10:43:35 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on SJ-20-207-59:37428 (size: 11.7 KB, free: 3.0 GB)
+21/03/19 10:43:35 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on SJ-20-207-59:37428 (size: 78.9 KB, free: 3.0 GB)
+21/03/19 10:43:35 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on SJ-20-207-41:43200 (size: 78.9 KB, free: 3.0 GB)
+21/03/19 10:43:37 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.75:51838) with ID 46
+21/03/19 10:43:37 INFO spark.ExecutorAllocationManager: New executor 46 has registered (new total is 44)
+21/03/19 10:43:38 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.75:51836) with ID 47
+21/03/19 10:43:38 INFO spark.ExecutorAllocationManager: New executor 47 has registered (new total is 45)
+21/03/19 10:43:38 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-75:35259 with 3.0 GB RAM, BlockManagerId(46, SJ-20-207-75, 35259, None)
+21/03/19 10:43:38 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-75:46381 with 3.0 GB RAM, BlockManagerId(47, SJ-20-207-75, 46381, None)
+21/03/19 10:43:41 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.40:35852) with ID 34
+21/03/19 10:43:41 INFO spark.ExecutorAllocationManager: New executor 34 has registered (new total is 46)
+21/03/19 10:43:41 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.40:35850) with ID 35
+21/03/19 10:43:41 INFO spark.ExecutorAllocationManager: New executor 35 has registered (new total is 47)
+21/03/19 10:43:41 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.40:35856) with ID 33
+21/03/19 10:43:41 INFO spark.ExecutorAllocationManager: New executor 33 has registered (new total is 48)
+21/03/19 10:43:41 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-40:44124 with 3.0 GB RAM, BlockManagerId(34, SJ-20-207-40, 44124, None)
+21/03/19 10:43:41 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-40:40254 with 3.0 GB RAM, BlockManagerId(35, SJ-20-207-40, 40254, None)
+21/03/19 10:43:41 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-40:46445 with 3.0 GB RAM, BlockManagerId(33, SJ-20-207-40, 46445, None)
+21/03/19 10:43:42 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 7090 ms on SJ-20-207-59 (executor 11) (1/2)
+21/03/19 10:43:42 INFO python.PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 58252
+21/03/19 10:43:44 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 9222 ms on SJ-20-207-41 (executor 40) (2/2)
+21/03/19 10:43:44 INFO cluster.YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: ShuffleMapStage 0 (groupByKey at /dfs/gongchengwei/z_drug_compile/drug_duplicate.spk.py:58) finished in 9.473 s
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: looking for newly runnable stages
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: running: Set()
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 1, ResultStage 2)
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: failed: Set()
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 1 (MapPartitionsRDD[7] at coalesce at NativeMethodAccessorImpl.java:0), which has no missing parents
+21/03/19 10:43:44 INFO memory.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 10.4 KB, free 365.9 MB)
+21/03/19 10:43:44 INFO memory.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 10.4 KB, free 365.9 MB)
+21/03/19 10:43:44 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on SJ-20-207-7:34244 (size: 10.4 KB, free: 366.2 MB)
+21/03/19 10:43:44 INFO spark.SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1164
+21/03/19 10:43:44 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 1 (MapPartitionsRDD[7] at coalesce at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1))
+21/03/19 10:43:44 INFO cluster.YarnScheduler: Adding task set 1.0 with 2 tasks
+21/03/19 10:43:44 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2, SJ-20-207-41, executor 40, partition 0, NODE_LOCAL, 7662 bytes)
+21/03/19 10:43:44 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 1.0 (TID 3, SJ-20-207-59, executor 12, partition 1, NODE_LOCAL, 7662 bytes)
+21/03/19 10:43:44 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on SJ-20-207-41:43200 (size: 10.4 KB, free: 3.0 GB)
+21/03/19 10:43:44 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 172.20.207.41:48362
+21/03/19 10:43:44 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on SJ-20-207-59:45877 (size: 10.4 KB, free: 3.0 GB)
+21/03/19 10:43:44 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 172.20.207.59:41538
+21/03/19 10:43:47 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 3480 ms on SJ-20-207-41 (executor 40) (1/2)
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 1.0 (TID 3) in 3812 ms on SJ-20-207-59 (executor 12) (2/2)
+21/03/19 10:43:48 INFO cluster.YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: ShuffleMapStage 1 (coalesce at NativeMethodAccessorImpl.java:0) finished in 3.829 s
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: looking for newly runnable stages
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: running: Set()
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: waiting: Set(ResultStage 2)
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: failed: Set()
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: Submitting ResultStage 2 (MapPartitionsRDD[13] at saveAsTextFile at NativeMethodAccessorImpl.java:0), which has no missing parents
+21/03/19 10:43:48 INFO memory.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 88.0 KB, free 365.8 MB)
+21/03/19 10:43:48 INFO memory.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 87.9 KB, free 365.7 MB)
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-7:34244 (size: 87.9 KB, free: 366.1 MB)
+21/03/19 10:43:48 INFO spark.SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1164
+21/03/19 10:43:48 INFO scheduler.DAGScheduler: Submitting 5 missing tasks from ResultStage 2 (MapPartitionsRDD[13] at saveAsTextFile at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4))
+21/03/19 10:43:48 INFO cluster.YarnScheduler: Adding task set 2.0 with 5 tasks
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 4, SJ-20-207-41, executor 40, partition 0, NODE_LOCAL, 7949 bytes)
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 2.0 (TID 5, SJ-20-207-59, executor 10, partition 1, NODE_LOCAL, 7949 bytes)
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 2.0 (TID 6, SJ-20-207-59, executor 13, partition 2, NODE_LOCAL, 7949 bytes)
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 2.0 (TID 7, SJ-20-207-59, executor 11, partition 3, NODE_LOCAL, 7949 bytes)
+21/03/19 10:43:48 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 2.0 (TID 8, SJ-20-207-41, executor 39, partition 4, NODE_LOCAL, 7949 bytes)
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-41:43200 (size: 87.9 KB, free: 3.0 GB)
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-59:37428 (size: 87.9 KB, free: 3.0 GB)
+21/03/19 10:43:48 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.207.59:41534
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-59:33170 (size: 87.9 KB, free: 3.0 GB)
+21/03/19 10:43:48 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.207.41:48362
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-59:34740 (size: 87.9 KB, free: 3.0 GB)
+21/03/19 10:43:48 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on SJ-20-207-41:39450 (size: 87.9 KB, free: 3.0 GB)
+21/03/19 10:43:49 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 4) in 1028 ms on SJ-20-207-41 (executor 40) (1/5)
+21/03/19 10:43:49 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.207.59:41532
+21/03/19 10:43:49 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.207.41:48360
+21/03/19 10:43:49 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.207.59:41536
+21/03/19 10:43:52 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.72:59250) with ID 5
+21/03/19 10:43:52 INFO spark.ExecutorAllocationManager: New executor 5 has registered (new total is 49)
+21/03/19 10:43:52 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.207.72:59248) with ID 4
+21/03/19 10:43:52 INFO spark.ExecutorAllocationManager: New executor 4 has registered (new total is 50)
+21/03/19 10:43:52 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-72:45162 with 3.0 GB RAM, BlockManagerId(4, SJ-20-207-72, 45162, None)
+21/03/19 10:43:52 INFO storage.BlockManagerMasterEndpoint: Registering block manager SJ-20-207-72:46065 with 3.0 GB RAM, BlockManagerId(5, SJ-20-207-72, 46065, None)
+21/03/19 10:43:54 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 2.0 (TID 8) in 6082 ms on SJ-20-207-41 (executor 39) (2/5)
+21/03/19 10:43:57 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 2.0 (TID 7) in 8961 ms on SJ-20-207-59 (executor 11) (3/5)
+21/03/19 10:44:10 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 2.0 (TID 5) in 22818 ms on SJ-20-207-59 (executor 10) (4/5)
+21/03/19 10:44:11 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 2.0 (TID 6) in 23135 ms on SJ-20-207-59 (executor 13) (5/5)
+21/03/19 10:44:11 INFO cluster.YarnScheduler: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+21/03/19 10:44:11 INFO scheduler.DAGScheduler: ResultStage 2 (runJob at SparkHadoopWriter.scala:78) finished in 23.171 s
+21/03/19 10:44:11 INFO scheduler.DAGScheduler: Job 0 finished: runJob at SparkHadoopWriter.scala:78, took 36.547092 s
+21/03/19 10:44:11 INFO io.SparkHadoopWriter: Job job_20210319104334_0013 committed.
+21/03/19 10:44:11 INFO spark.SparkContext: Invoking stop() from shutdown hook
+21/03/19 10:44:11 INFO server.AbstractConnector: Stopped Spark@5d2198db{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+21/03/19 10:44:11 INFO ui.SparkUI: Stopped Spark web UI at http://SJ-20-207-7:4040
+21/03/19 10:44:11 INFO cluster.YarnClientSchedulerBackend: Interrupting monitor thread
+21/03/19 10:44:11 INFO cluster.YarnClientSchedulerBackend: Shutting down all executors
+21/03/19 10:44:11 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+21/03/19 10:44:11 INFO cluster.SchedulerExtensionServices: Stopping SchedulerExtensionServices
+(serviceOption=None,
+ services=List(),
+ started=false)
+21/03/19 10:44:11 INFO cluster.YarnClientSchedulerBackend: Stopped
+21/03/19 10:44:13 INFO spark.MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+21/03/19 10:44:13 INFO memory.MemoryStore: MemoryStore cleared
+21/03/19 10:44:13 INFO storage.BlockManager: BlockManager stopped
+21/03/19 10:44:13 INFO storage.BlockManagerMaster: BlockManagerMaster stopped
+21/03/19 10:44:13 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+21/03/19 10:44:13 INFO spark.SparkContext: Successfully stopped SparkContext
+21/03/19 10:44:13 INFO util.ShutdownHookManager: Shutdown hook called
+21/03/19 10:44:13 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-85cf598b-6cb3-4ab6-9918-540fc8a4f184
+21/03/19 10:44:13 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-4f91c9ca-de50-4f17-b9f4-e9ae448fac60/pyspark-a247b532-4324-446a-acd8-01db394f6b2e
+21/03/19 10:44:13 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-4f91c9ca-de50-4f17-b9f4-e9ae448fac60
++ '[' 0 -ne 0 ']'
++ exit 0

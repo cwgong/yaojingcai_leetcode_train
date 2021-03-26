@@ -1,0 +1,1 @@
+select platform_type,spu_id,title from (select platform_type ,spu_id ,regexp_replace(title, '[\t|\r]', ' ') as title ,row_number() over(partition by platform_type, spu_id order by dt desc) rn from dwi.dwi_retailers_online_platform_info where platform_type in ('tmall', 'jd') and dc = 'month' and dt >= '2019_m01' and sale_amount > 0 and category3_id_std = '300600') x where rn = 1
